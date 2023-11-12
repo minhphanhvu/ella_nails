@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+friends = Friend.create([
+  {name: "Nemwel Boniface", phone: 754135545, twitter: "@nemwel_bonie", email: "nemwelboniface@outlook.com", location: "Nairobi, Kenya"}
+])
