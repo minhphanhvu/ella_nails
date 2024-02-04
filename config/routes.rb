@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :friends
+      post "/post_friends", :to => "friends#post_friends"
     end
   end
 end
