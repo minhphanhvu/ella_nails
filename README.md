@@ -5,11 +5,11 @@ and allow the service to easily keep tracking of their activities.
 
 Use cases:
   - One staff can have many NailService
-  - One service can have only one staff
-  - A service can have different price based on a specific staff?
+  - One service can belong to one staff only
+  - A service can have different price based on a specific staff
   - Availability will be determined by the current number of booked service ->
-  each service may have an estimated time from start to finish?
-  - What is the appropriate time slot for NailService? (5-minute slots)
+  each service may have an estimated time from start to finish
+  - What is the appropriate time slot for NailService (5-minute slots)
   - A customers can schedule for a service with the same staff on different days
   - WorkFlow:
   *For a calendar -> preresent all days of the month -> calculate availability based on the day that the customers choose*
@@ -24,5 +24,21 @@ Use cases:
       -> preresent the final time slots
 
 Models:
-  - NailService: can have one or more staff
+  - NailService: can belong to one staff only
+    - staff_id (number)
+    - duration (time in minutes)
+    - price (number)
   - NailStaff: can have one or more NailService
+    - name (string)
+  - Customer:
+    - email (string)
+    - phone number (string number)
+    - name (string)
+  - ScheduledSlot:
+    - time_start (hour:minute)
+    - time_end (hour:minute)
+    - date (date) (indexed)
+    - customer_id (indexed)
+    - staff_id (indexed)
+    - notes
+  
