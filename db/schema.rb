@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_052700) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_24_060904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,11 +40,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_052700) do
 
   create_table "nail_services", force: :cascade do |t|
     t.interval "duration", null: false
-    t.integer "price", null: false
+    t.float "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "nail_employee_id", null: false
+    t.bigint "service_category_id", null: false
+    t.string "name"
     t.index ["nail_employee_id"], name: "index_nail_services_on_nail_employee_id"
+    t.index ["service_category_id"], name: "index_nail_services_on_service_category_id"
   end
 
   create_table "scheduled_slots", force: :cascade do |t|
@@ -60,7 +63,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_052700) do
     t.index ["nail_employee_id"], name: "index_scheduled_slots_on_nail_employee_id"
   end
 
+  create_table "service_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "nail_services", "nail_employees"
+  add_foreign_key "nail_services", "service_categories"
   add_foreign_key "scheduled_slots", "customers"
   add_foreign_key "scheduled_slots", "nail_employees"
 end

@@ -26,8 +26,12 @@ Use cases:
 Models:
   - NailService: can belong to one staff only
     - staff_id (number)
+    - service_category_id (number)
     - duration (time in minutes)
     - price (number)
+  - ServiceCategory:
+    - name (string)
+    - can have many NailServices
   - NailStaff: can have one or more NailService
     - name (string)
   - Customer:
