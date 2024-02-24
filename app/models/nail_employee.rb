@@ -1,0 +1,2 @@
+class NailEmployee < ApplicationRecord
+end

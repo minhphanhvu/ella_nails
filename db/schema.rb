@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_12_084707) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_24_052700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "phone_number", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friends", force: :cascade do |t|
     t.string "name"
@@ -24,4 +32,35 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_12_084707) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "nail_employees", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "nail_services", force: :cascade do |t|
+    t.interval "duration", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "nail_employee_id", null: false
+    t.index ["nail_employee_id"], name: "index_nail_services_on_nail_employee_id"
+  end
+
+  create_table "scheduled_slots", force: :cascade do |t|
+    t.time "time_start", null: false
+    t.time "time_end", null: false
+    t.date "scheduled_date", null: false
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "customer_id"
+    t.bigint "nail_employee_id", null: false
+    t.index ["customer_id"], name: "index_scheduled_slots_on_customer_id"
+    t.index ["nail_employee_id"], name: "index_scheduled_slots_on_nail_employee_id"
+  end
+
+  add_foreign_key "nail_services", "nail_employees"
+  add_foreign_key "scheduled_slots", "customers"
+  add_foreign_key "scheduled_slots", "nail_employees"
 end

@@ -1,0 +1,2 @@
+class ScheduledSlot < ApplicationRecord
+end

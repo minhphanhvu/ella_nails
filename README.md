@@ -41,4 +41,3 @@ Models:
     - customer_id (indexed)
     - staff_id (indexed)
     - notes
-  
