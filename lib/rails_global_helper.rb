@@ -3,6 +3,7 @@ module RailsGlobalHelper
     Friend.destroy_all
     NailService.destroy_all
     NailEmployee.destroy_all
+    NailServiceTemplate.destroy_all
     ServiceCategory.destroy_all
   end
 end

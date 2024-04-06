@@ -11,9 +11,10 @@
 case Rails.env
 when "development" || "test"
   Friend.destroy_all
-
   NailService.destroy_all
   NailEmployee.destroy_all
+  NailServiceTemplate.destroy_all
+  ServiceCategory.destroy_all
 
   NailEmployee.create!([
     {
@@ -23,8 +24,6 @@ when "development" || "test"
       name: "Izabella"
     }
   ])
-
-  ServiceCategory.destroy_all
 
   ServiceCategory.create!([
     {
@@ -42,57 +41,48 @@ when "development" || "test"
   kid_category = ServiceCategory.find_by_name("KID")
   waxing_category = ServiceCategory.find_by_name("Waxing")
 
-  NailEmployee.all.each do |employee|
-    NailService.create!([
-      {
-        name: "Basic Manicures",
-        duration: 20.minutes,
-        price: 15.0,
-        nail_employee: employee,
-        service_category: kid_category
-      },
-      {
-        name: "Basic Pedicures",
-        duration: 20.minutes,
-        price: 25.0,
-        nail_employee: employee,
-        service_category: kid_category
-      },
-      {
-        name: "Polish Change hand",
-        duration: 15.minutes,
-        price: 8.0,
-        nail_employee: employee,
-        service_category: kid_category
-      },
-      {
-        name: "Polish Change feet",
-        duration: 15.minutes,
-        price: 11.0,
-        nail_employee: employee,
-        service_category: kid_category
-      },
-      {
-        name: "Eyebrows",
-        duration: 5.minutes,
-        price: 12.0,
-        nail_employee: employee,
-        service_category: waxing_category
-      },
-      {
-        name: "Lip/Chin",
-        duration: 5.minutes,
-        price: 8.0,
-        nail_employee: employee,
-        service_category: waxing_category
-      },
-      {
-        name: "Full Face $30+",
-        duration: 15.minutes,
-        price: 30.0,
-        nail_employee: employee,
-        service_category: waxing_category
-      }
-    ])
-  end
+  NailServiceTemplate.create!([
+    {
+      name: "Basic Manicures",
+      duration: 20.minutes,
+      price: 15.0,
+      service_category: kid_category
+    },
+    {
+      name: "Basic Pedicures",
+      duration: 20.minutes,
+      price: 25.0,
+      service_category: kid_category
+    },
+    {
+      name: "Polish Change hand",
+      duration: 15.minutes,
+      price: 8.0,
+      service_category: kid_category
+    },
+    {
+      name: "Polish Change feet",
+      duration: 15.minutes,
+      price: 11.0,
+      service_category: kid_category
+    },
+    {
+      name: "Eyebrows",
+      duration: 5.minutes,
+      price: 12.0,
+      service_category: waxing_category
+    },
+    {
+      name: "Lip/Chin",
+      duration: 5.minutes,
+      price: 8.0,
+      service_category: waxing_category
+    },
+    {
+      name: "Full Face $30+",
+      duration: 15.minutes,
+      price: 30.0,
+      service_category: waxing_category
+    }
+  ])
 end
