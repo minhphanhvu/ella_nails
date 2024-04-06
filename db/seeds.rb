@@ -8,88 +8,91 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Friend.destroy_all
+case Rails.env
+when "development" || "test"
+  Friend.destroy_all
 
-NailService.destroy_all
-NailEmployee.destroy_all
+  NailService.destroy_all
+  NailEmployee.destroy_all
 
-NailEmployee.create!([
-  {
-    name: "Elijah"
-  },
-  {
-    name: "Izabella"
-  }
-])
-
-ServiceCategory.destroy_all
-
-ServiceCategory.create!([
-  {
-    name: "Services",
-  },
-  {
-    name: "KID",
-  },
-  {
-    name: "Waxing"
-  }
-])
-
-services_category = ServiceCategory.find_by_name("Services")
-kid_category = ServiceCategory.find_by_name("KID")
-waxing_category = ServiceCategory.find_by_name("Waxing")
-
-NailEmployee.all.each do |employee|
-  NailService.create!([
+  NailEmployee.create!([
     {
-      name: "Basic Manicures",
-      duration: 20.minutes,
-      price: 15.0,
-      nail_employee: employee,
-      service_category: kid_category
+      name: "Elijah"
     },
     {
-      name: "Basic Pedicures",
-      duration: 20.minutes,
-      price: 25.0,
-      nail_employee: employee,
-      service_category: kid_category
-    },
-    {
-      name: "Polish Change hand",
-      duration: 15.minutes,
-      price: 8.0,
-      nail_employee: employee,
-      service_category: kid_category
-    },
-    {
-      name: "Polish Change feet",
-      duration: 15.minutes,
-      price: 11.0,
-      nail_employee: employee,
-      service_category: kid_category
-    },
-    {
-      name: "Eyebrows",
-      duration: 5.minutes,
-      price: 12.0,
-      nail_employee: employee,
-      service_category: waxing_category
-    },
-    {
-      name: "Lip/Chin",
-      duration: 5.minutes,
-      price: 8.0,
-      nail_employee: employee,
-      service_category: waxing_category
-    },
-    {
-      name: "Full Face $30+",
-      duration: 15.minutes,
-      price: 30.0,
-      nail_employee: employee,
-      service_category: waxing_category
+      name: "Izabella"
     }
   ])
+
+  ServiceCategory.destroy_all
+
+  ServiceCategory.create!([
+    {
+      name: "Services",
+    },
+    {
+      name: "KID",
+    },
+    {
+      name: "Waxing"
+    }
+  ])
+
+  services_category = ServiceCategory.find_by_name("Services")
+  kid_category = ServiceCategory.find_by_name("KID")
+  waxing_category = ServiceCategory.find_by_name("Waxing")
+
+  NailEmployee.all.each do |employee|
+    NailService.create!([
+      {
+        name: "Basic Manicures",
+        duration: 20.minutes,
+        price: 15.0,
+        nail_employee: employee,
+        service_category: kid_category
+      },
+      {
+        name: "Basic Pedicures",
+        duration: 20.minutes,
+        price: 25.0,
+        nail_employee: employee,
+        service_category: kid_category
+      },
+      {
+        name: "Polish Change hand",
+        duration: 15.minutes,
+        price: 8.0,
+        nail_employee: employee,
+        service_category: kid_category
+      },
+      {
+        name: "Polish Change feet",
+        duration: 15.minutes,
+        price: 11.0,
+        nail_employee: employee,
+        service_category: kid_category
+      },
+      {
+        name: "Eyebrows",
+        duration: 5.minutes,
+        price: 12.0,
+        nail_employee: employee,
+        service_category: waxing_category
+      },
+      {
+        name: "Lip/Chin",
+        duration: 5.minutes,
+        price: 8.0,
+        nail_employee: employee,
+        service_category: waxing_category
+      },
+      {
+        name: "Full Face $30+",
+        duration: 15.minutes,
+        price: 30.0,
+        nail_employee: employee,
+        service_category: waxing_category
+      }
+    ])
+  end
 end

@@ -24,24 +24,37 @@ Use cases:
       -> preresent the final time slots
 
 Models:
-  - NailService: can belong to one staff only
-    - staff_id (number)
+  - NailService: can belong to one employee only
+    - name (string)
+    - employee_id (number)
+    - nail_service_template_id
     - service_category_id (number)
-    - duration (time in minutes)
+    - duration (time in minutes) (inherit from template - customizable)
+    - price (number) (inherit from template - customizable)
+  - NailServiceTemplate: has many nail service
+    - name (string)
     - price (number)
+    - duration (time in minutes)
+    - service_category_id (number)
   - ServiceCategory:
     - name (string)
     - can have many NailServices
-  - NailStaff: can have one or more NailService
+  - NailEmployee: can have one or more NailService
     - name (string)
   - Customer:
     - email (string)
     - phone number (string number)
     - name (string)
-  - ScheduledSlot:
-    - time_start (hour:minute)
-    - time_end (hour:minute)
+  - ScheduledSlot: (make this a service to store temporary data from the front end instead)
+    - time_start (hour:minute) - minimum of the slots
+    - time_end (hour:minute) - maximum of the slots
+    - slots (hour:minute) - an array string
     - date (date) (indexed)
     - customer_id (indexed)
     - staff_id (indexed)
     - notes
+
+  The time slot difference is 5 minutes
+  All the services booked at the same time will be nested in one time slot.
+  How do we know which server the nail employee needs to do in one time slot?
+
