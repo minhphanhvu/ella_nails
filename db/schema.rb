@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_06_013945) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_29_044759) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_013945) do
   end
 
   create_table "nail_service_templates", force: :cascade do |t|
-    t.interval "duration", null: false
+    t.interval "service_duration", null: false
     t.float "price", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_013945) do
   end
 
   create_table "nail_services", force: :cascade do |t|
-    t.interval "duration", null: false
+    t.interval "service_duration", null: false
     t.float "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,17 +60,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_013945) do
     t.index ["nail_service_template_id"], name: "index_nail_services_on_nail_service_template_id"
   end
 
-  create_table "scheduled_slots", force: :cascade do |t|
-    t.time "time_start", null: false
-    t.time "time_end", null: false
+  create_table "scheduled_dates", force: :cascade do |t|
     t.date "scheduled_date", null: false
-    t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "customer_id"
     t.bigint "nail_employee_id", null: false
-    t.index ["customer_id"], name: "index_scheduled_slots_on_customer_id"
-    t.index ["nail_employee_id"], name: "index_scheduled_slots_on_nail_employee_id"
+    t.index ["nail_employee_id"], name: "index_scheduled_dates_on_nail_employee_id"
+    t.index ["scheduled_date"], name: "index_scheduled_dates_on_scheduled_date"
+  end
+
+  create_table "scheduled_services", force: :cascade do |t|
+    t.time "start_time", null: false
+    t.time "stop_time", null: false
+    t.float "price", null: false
+    t.interval "service_duration", null: false
+    t.bigint "scheduled_date_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scheduled_date_id"], name: "index_scheduled_services_on_scheduled_date_id"
   end
 
   create_table "service_categories", force: :cascade do |t|
@@ -82,6 +89,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_06_013945) do
   add_foreign_key "nail_service_templates", "service_categories"
   add_foreign_key "nail_services", "nail_employees"
   add_foreign_key "nail_services", "nail_service_templates"
-  add_foreign_key "scheduled_slots", "customers"
-  add_foreign_key "scheduled_slots", "nail_employees"
+  add_foreign_key "scheduled_dates", "nail_employees"
+  add_foreign_key "scheduled_services", "scheduled_dates"
 end
