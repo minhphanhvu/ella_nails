@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_29_044759) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_31_032328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -77,6 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_044759) do
     t.bigint "scheduled_date_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
     t.index ["scheduled_date_id"], name: "index_scheduled_services_on_scheduled_date_id"
   end
 
