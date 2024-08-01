@@ -47,7 +47,6 @@ group :development, :test do
   gem "shoulda-matchers", "~> 6.0"
   gem "factory_bot_rails"
   gem "faker"
-  gem "grape_on_rails_routes"
 end
 
 group :development do
@@ -55,5 +54,6 @@ group :development do
   # gem "spring"
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem "grape_on_rails_routes"
 end
 
