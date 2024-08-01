@@ -15,4 +15,7 @@ Rails.application.routes.draw do
       post "/post_friends", :to => "friends#post_friends"
     end
   end
+
+  # API
+  mount Root => "/"
 end
