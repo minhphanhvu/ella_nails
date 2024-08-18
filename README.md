@@ -49,12 +49,11 @@ Models:
     - time_start (hour:minute) - minimum of the slots
     - time_end (hour:minute) - maximum of the slots
     - slots (hour:minute) - an array string
-    - date (date) (indexed)
+    - scheduled_date (date)
     - customer_id (indexed)
-    - staff_id (indexed)
+    - nail_employee_id (indexed)
     - notes
 
   The time slot difference is 5 minutes
   All the services booked at the same time will be nested in one time slot.
   How do we know which server the nail employee needs to do in one time slot?
-

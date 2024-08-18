@@ -3,5 +3,5 @@ class Root < Grape::API
   format :json
   prefix :api
 
-  mount BookingService
+  mount BookingServiceApi
 end

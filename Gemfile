@@ -39,6 +39,8 @@ gem "dotenv-rails"
 # Grape API
 gem "grape"
 
+gem "tod"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
@@ -47,6 +49,9 @@ group :development, :test do
   gem "shoulda-matchers", "~> 6.0"
   gem "factory_bot_rails"
   gem "faker"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
+  gem "rubocop"
 end
 
 group :development do
